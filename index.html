@@ -1,0 +1,210 @@
+<!html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="main.css">
+    <title>Modern JavaScript aka. ECMAScript 6</title>
+  </head>
+  <body>
+    <section>
+      <h1>Modern JavaScript aka. ECMAScript 6</h1>
+    </section>
+    <section>
+      <div>
+        <h1>Eingangsscherz</h1>
+        <code class="code-oneline">
+          Array(16).join('hero'-1) + "Batman";
+        </code>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h1>Brendan Eich & Netscape 2.0</h1>
+        <div class="image-list">
+          <img src="img/eich.jpg" alt="Brendan Eich" />
+          <img src="img/netscape_2.0.png" alt="Netscape 2.0" />
+        </div>
+      </div>
+    </section>
+    <section>
+      <h1>ECMAScript 1</h1>
+    </section>
+    <section>
+      <div>
+        <h1>ECMAScript 2</h1>
+        <div class="note"> ~ rein editoriale Verbesserungen ~</div>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h1>ECMAScript 3</h1>
+        <div class="note">
+          Regular Expressions, try/catch, …
+        </div>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h1>(Es gibt kein) ECMAScript 4</h1>
+        <div class="alert note">Wegen Differenzen zwischen den Beteiligten verworfen.</div>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h1>ECMAScript 5</h1>
+        <ul>
+          <li>"strict mode" → Bügelt einige konzeptionelle Fehler aus</li>
+          <li>JSON Object</li>
+          <li>Reflection</li>
+        </ul>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h1>ECMAScript 5: Unknown Addition</h1>
+        <ul>
+          <li>Getter
+            <code>
+              var obj = { z: 2, get bar() { return this.z * 5; } };
+              console.log(obj.bar)
+            </code>
+          </li>
+          <li>Setter
+            <code>
+              var obj = { z: 0, set bar(v) { this.z = v / 2; } };<br>
+              obj.bar = 10;<br>
+              console.log(obj.z);<br>
+            </code>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h1>ECMAScript 5.1</h1>
+        <div class="note"> ~ rein editoriale Verbesserungen ~</div>
+      </div>
+    </section>
+    <section>
+      <h1>Heute: ECMA Script 6</h1>
+    </section>
+
+    <section>
+      <h1>Grundlagen</h1>
+    </section>
+    <section class="note small">
+      <div>
+        <h1>Typen: Object & Function</h1>
+        <div class="small">… und auch Boolean, Null, String, Symbol (neu in ES6), Undefined</div>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h1>Objects</h1>
+        <code>
+          var a = {};<br>
+          var b = { property: 1 };
+        </code>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h1>Functions</h1>
+        <code>
+          function sayHello () { <br>&nbsp;&nbsp;console.log('Hello!'); <br>}; <br>
+          var anotherGreeter = function () { <br>&nbsp;&nbsp;console.log('Hi Folks!');<br>}; <br>
+          var yetAnotherGreeter = () => console.log('Ho!');
+        </code>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h1>Call / Apply</h1>
+        <code>
+          var greeter = () => console.log('Ho!'); <br>
+          greeter(); <br>
+          >> Ho! <br>
+          gretter.call(); <br>
+          >> Ho! <br>
+          gretter.apply(); <br>
+          >> Ho!
+        </code>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h1>Object Types</h1>
+        <code>
+          var Car = function (speed) { <br>
+          &nbsp;&nbsp;this.speed - speed;<br>
+          }<br>
+          var my = new Car(100);<br>
+          my.speed;<br>
+          >> 100
+        </code>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h1>Call again</h1>
+        <code>
+          fun.call(thisArg[, arg1[, arg2[, ...]]])
+        </code>
+        <code>
+          new Car(100);<br>
+          Car.call({}, 100); // nur hier
+        </code>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h1>Prototype</h1>
+        <code>
+          var Car = …<br>
+          Car.prototype.doIt = function () {<br>
+          &nbsp;&nbsp;console.log("Driving with " + this.speed + "km/h");<br>
+          };<br>
+          var my = new Car(100);<br>
+          my.doIt();<br>
+          >> Driving with 100km/h<br>
+        </code>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h1>Call once again</h1>
+        
+      </div>
+
+    </section>
+
+    <section><h1>Prototype Chain / Vererbung</h1></section>
+
+    <section><h1>this / Scopes</h1></section>
+
+    <section><h1>ES 6</h1></section>
+    <section><h1>Class literal</h1></section>
+    <section><h1>Scoping</h1></section>
+    <section><h1>Object Properties</h1></section>
+    <section><h1>Arrow functions</h1></section>
+    <section><h1>let / const</h1></section>
+    <section><h1>Template Literals</h1></section>
+    <section><h1>Promises</h1></section>
+
+    <section><h1>Praxis</h1></section>
+    <section><h1>Browser Support</h1></section>
+    <section><h1>babel</h1></section>
+
+    <script src="jquery-1.12.0.min.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
