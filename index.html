@@ -12,11 +12,11 @@
 
     <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="main.css">
-    <title>Modern JavaScript aka. ECMAScript 6</title>
+    <title>Modern JavaScript aka ECMAScript 6</title>
   </head>
   <body>
     <section>
-      <h1>Modern JavaScript aka. ECMAScript 6</h1>
+      <h1>Modern JavaScript <br> aka ECMAScript 6</h1>
     </section>
     <section>
       <div>
@@ -82,7 +82,7 @@
             <code>
               var obj = { z: 0, set bar(v) { this.z = v / 2; } };<br>
               obj.bar = 10;<br>
-              console.log(obj.z);<br>
+              console.log(obj.z);
             </code>
           </li>
         </ul>
@@ -145,8 +145,8 @@
         <h1>Object Types</h1>
         <code>
           var Car = function (speed) { <br>
-          &nbsp;&nbsp;this.speed - speed;<br>
-          }<br>
+          &nbsp;&nbsp;this.speed = speed;<br>
+          };<br>
           var my = new Car(100);<br>
           my.speed;<br>
           >> 100
@@ -182,27 +182,253 @@
     <section>
       <div>
         <h1>Call once again</h1>
-        
+        <code>
+          Object.create(proto[, propertiesObject])
+        </code>
+        <code>
+          var car = new Car(100);<br>
+          var anotherCar = Object.create(Car.prototype);<br>
+          Car.call(anotherCar, 100);
+        </code>
       </div>
-
+    </section>
+    <section>
+      <div>
+        <h1>Prototype Chain / Vererbung</h1>
+        <code>
+          var Car = …;<br>
+          var SuperCar = function (speed) {<br>
+          &nbsp;&nbsp;Car.call(this, speed);<br>
+          };<br>
+          SuperCar.prototype = Object.create(Car.prototype);<br>
+          (new SuperCar(100)).doIt();
+        </code>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h1>Kanonischer…</h1>
+        <code>
+          var Car = …;<br>
+          var SuperCar = function (speed) {<br>
+          &nbsp;&nbsp;Car.apply(this, arguments);<br>
+          };<br>
+          SuperCar.prototype = Object.create(Car.prototype);<br>
+          (new SuperCar(100)).doIt();
+        </code>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h1>this / Scopes I</h1>
+        <code>
+          var Car = … // Wie oben<br>
+          var c = new Car(100);<br>
+          c.doIt();<br>
+          >> Driving with 100km/h
+        </code>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h1>this / Scopes II</h1>
+        <code>
+          var c = new Car(100);<br>
+          c.doIt.call(c);<br>
+          >> Driving with 100km/h
+        </code>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h1>this / Scopes II</h1>
+        <code>
+          var c = new Car(100);<br>
+          var doIt = c.doIt;<br>
+          doIt()<br>
+          >> ?
+        </code>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h1>this / Scopes III</h1>
+        <code>
+          var c = new Car(100);<br>
+          var bound = c.doIt.bind(c);<br>
+          bound();<br>
+          >> ?
+        </code>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h1>this / Scopes IV</h1>
+        <div class="note alert">"strict mode"</div>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h1>Hoisting</h1>
+        <code>
+          a = 1;<br>
+          var a;<br>
+          <br>
+          a();<br>
+          function a() { console.log('works'); };
+        </code>
+      </div>
     </section>
 
-    <section><h1>Prototype Chain / Vererbung</h1></section>
+    <section><h1>Verbesserungen ES6</h1></section>
+    <section>
+      <div>
+        <h1>Object literal</h1>
+        <code>
+          {<br>
+          &nbsp;&nbsp;calculateSomething(a, b) {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;return a * b;<br>
+          &nbsp;&nbsp;}<br>
+          } // Method properties<br><br>
+          var a = 2, b = 2;<br>
+          { a, b } === { a: a, b: b } // Property shorthand<br>
+          { [ 'foo' + a ]: b } // Computed property names
+        </code>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h1>Class literal</h1>
+        <code>
+          class Shape {<br>
+          &nbsp;&nbsp;constructor(height, width) {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;this.height = height;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;this.width = width;<br>
+          &nbsp;&nbsp;}<br>
+          }
+        </code>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h1>Class literal II / Methods</h1>
+        <code>
+          class Shape {<br>
+          &nbsp;&nbsp;constructor(height, width) { … }<br>
+          &nbsp;&nbsp;calculateArea() {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;return this.height * this.width;<br>
+          &nbsp;&nbsp;}<br>
+          &nbsp;&nbsp;get area() {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;return this.calculateArea();<br>
+          &nbsp;&nbsp;}<br>
+          }
+        </code>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h1>Class literal III / Static Methods</h1>
+        <code>
+          class Shape {<br>
+          &nbsp;&nbsp;static distance(a, b) {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;return Math.sqrt(<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(a.x - b.x)*(a.x - b.x) +<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(a.y - b.y)*(a.y - b.y)<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;);<br>
+          &nbsp;&nbsp;}<br>
+          }
+        </code>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h1>Class literal IV / Inheritance</h1>
+        <code>
+          class Square extends Shape {<br>
+          &nbsp;&nbsp;constructor(a) {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;super(a, a);<br>
+          &nbsp;&nbsp;}<br>
+          &nbsp;&nbsp;myMethod() {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;return super.myMethod();<br>
+          &nbsp;&nbsp;}<br>
+          }
+        </code>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h1>Class literal V / Hoisting</h1>
+        <div class="note nice">Gibt es nicht!</div>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h1>Scoping / let & const</h1>
+        <ul>
+          <li><code>let</code> Lexikalischer Scope Referenz</li>
+          <li><code>const</code> Lexikalischer Scope konstante Referenz</li>
+        </ul>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h1>Scoping / function</h1>
+        <div class="note nice">Funktionen sind Block-scoped!</div>
+        <code>
+          {<br>
+          &nbsp;&nbsp;function foo () { return 1 }<br>
+          &nbsp;&nbsp;foo() === 1<br>
+          &nbsp;&nbsp;{<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;function foo () { return 2 }<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;foo() === 2<br>
+          &nbsp;&nbsp;}<br>
+          &nbsp;&nbsp;foo() === 1<br>
+          }
+        </code>
+      </div>
+    </section>
 
-    <section><h1>this / Scopes</h1></section>
-
-    <section><h1>ES 6</h1></section>
-    <section><h1>Class literal</h1></section>
-    <section><h1>Scoping</h1></section>
-    <section><h1>Object Properties</h1></section>
     <section><h1>Arrow functions</h1></section>
-    <section><h1>let / const</h1></section>
-    <section><h1>Template Literals</h1></section>
-    <section><h1>Promises</h1></section>
 
-    <section><h1>Praxis</h1></section>
-    <section><h1>Browser Support</h1></section>
-    <section><h1>babel</h1></section>
+    <section>
+      <div>
+        <h1>Modules</h1>
+        <code>
+          //  lib/math.js<br>
+          export function sum (x, y) { return x + y }<br>
+          export var pi = 3.141593<br>
+          <br>
+          //  someApp.js<br>
+          import * as math from "lib/math"<br>
+          console.log("2π = " + math.sum(math.pi, math.pi))<br>
+          <br>
+          //  otherApp.js<br>
+          import { sum, pi } from "lib/math"<br>
+          console.log("2π = " + sum(pi, pi))
+        </code>
+      </div>
+    </section>
+
+    <section>
+      <div>
+        <h1>Weitere Features</h1>
+        <div class="note">See <a href="http://es6-features.org/">http://es6-features.org/</a></div>
+      </div>
+    </section>
+
+    <section>
+      <div>
+        <h1>Browser Support</h1>
+        <div class="note">See <a href="https://kangax.github.io/compat-table/es6/">https://kangax.github.io/compat-table/es6/</a></div>
+      </div>
+    </section>
+    <section>
+      <div>
+        <h1>babel</h1>
+        <div class="note">See <a href="https://babeljs.io/">https://babeljs.io/</a></div>
+    </section>
+
+    <section><h1>ENDE</h1></section>
 
     <script src="jquery-1.12.0.min.js"></script>
     <script src="main.js"></script>
